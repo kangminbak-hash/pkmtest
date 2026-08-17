@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>개인정보처리방침 | 로또 번호 5세트 추천기</title>
+  <meta name="description" content="로또 번호 5세트 추천기 사이트의 개인정보처리방침입니다. 쿠키, 광고(Google AdSense) 사용, 수집하는 정보와 이용 목적을 안내합니다.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-gradient: linear-gradient(135deg, #111827, #1d4ed8);
+      --container-bg: #ffffff;
+      --title-color: #111827;
+      --desc-color: #6b7280;
+      --notice-color: #9ca3af;
+      --notice-border: #e5e7eb;
+      --container-shadow: rgba(0, 0, 0, 0.25);
+      --toggle-bg: rgba(17, 24, 39, 0.06);
+      --toggle-color: #111827;
+    }
+
+    [data-theme="dark"] {
+      --bg-gradient: linear-gradient(135deg, #05070d, #0b1220);
+      --container-bg: #1a1f2b;
+      --title-color: #f3f4f6;
+      --desc-color: #9ca3af;
+      --notice-color: #6b7280;
+      --notice-border: #2d3340;
+      --container-shadow: rgba(0, 0, 0, 0.5);
+      --toggle-bg: rgba(255, 255, 255, 0.08);
+      --toggle-color: #f3f4f6;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 30px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: var(--bg-gradient);
+      transition: background 0.3s ease;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      padding: 45px 30px;
+      border-radius: 24px;
+      background-color: var(--container-bg);
+      box-shadow: 0 20px 50px var(--container-shadow);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 50%;
+      background-color: var(--toggle-bg);
+      color: var(--toggle-color);
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.08);
+    }
+
+    h1 {
+      margin-bottom: 8px;
+      color: var(--title-color);
+      font-size: 28px;
+      transition: color 0.3s ease;
+    }
+
+    .updated {
+      margin-bottom: 30px;
+      color: var(--notice-color);
+      font-size: 13px;
+      transition: color 0.3s ease;
+    }
+
+    section {
+      margin-bottom: 26px;
+    }
+
+    section:last-of-type {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: var(--title-color);
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    p, li {
+      color: var(--desc-color);
+      font-size: 14.5px;
+      line-height: 1.8;
+      transition: color 0.3s ease;
+    }
+
+    ul {
+      margin: 8px 0 0 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    a {
+      color: #3b82f6;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--notice-border);
+      color: var(--notice-color);
+      font-size: 13px;
+      text-decoration: none;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--desc-color);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 35px 15px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="다크모드 전환">🌙</button>
+
+    <h1>개인정보처리방침</h1>
+    <p class="updated">최종 수정일: 2026년 8월 17일</p>
+
+    <section>
+      <h2>1. 수집하는 정보</h2>
+      <p>
+        본 사이트(이하 "로또 번호 5세트 추천기")는 회원가입이나 로그인 절차가
+        없으며, 이용자가 직접 입력하는 이름, 이메일 등의 개인정보를 별도로
+        수집·저장하지 않습니다. 로또 번호 생성 기능은 이용자의 브라우저
+        안에서만 동작하며, 생성된 번호를 서버로 전송하거나 보관하지
+        않습니다.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. 쿠키 및 로컬 저장소 사용</h2>
+      <p>
+        다크모드/화이트모드 설정과 같이 이용자의 편의를 위한 값은 브라우저의
+        로컬 저장소(localStorage)에 저장되며, 이 정보는 이용자의 기기에만
+        남고 외부로 전송되지 않습니다.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. 광고 서비스 (Google AdSense)</h2>
+      <p>
+        본 사이트는 Google AdSense를 통해 광고를 게재할 수 있습니다. Google
+        을 포함한 제3자 광고 파트너는 쿠키를 사용해 이용자의 이전 방문
+        기록을 바탕으로 광고를 게재할 수 있습니다. Google의 광고 쿠키 사용에
+        관한 자세한 내용은
+        <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google 광고 정책 페이지</a>
+        에서 확인하실 수 있으며, 개인 맞춤 광고는
+        <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">Google 광고 설정</a>
+        에서 언제든지 해제할 수 있습니다.
+      </p>
+    </section>
+
+    <section>
+      <h2>4. 제3자 제공</h2>
+      <p>
+        본 사이트는 이용자의 개인정보를 별도로 수집하지 않으므로, 광고
+        서비스 제공을 위해 필요한 최소한의 정보(쿠키 등) 외에는 제3자에게
+        제공하지 않습니다.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. 문의</h2>
+      <p>
+        개인정보 처리방침에 대해 궁금한 점이 있으시면 아래 문의 폼을 통해
+        연락해 주세요.
+      </p>
+      <ul>
+        <li><a href="partner.html">문의하기</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. 방침 변경</h2>
+      <p>
+        본 방침은 관련 법령이나 서비스 변경에 따라 수정될 수 있으며, 변경
+        시 이 페이지를 통해 고지합니다.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+      themeToggle.setAttribute(
+        "aria-label",
+        theme === "dark" ? "라이트모드 전환" : "다크모드 전환"
+      );
+      localStorage.setItem("theme", theme);
+    }
+
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
+
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      applyTheme(currentTheme === "dark" ? "light" : "dark");
+    });
+  </script>
+</body>
+</html>
