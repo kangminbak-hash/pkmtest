@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>제휴 문의</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-gradient: linear-gradient(135deg, #111827, #1d4ed8);
+      --container-bg: #ffffff;
+      --title-color: #111827;
+      --desc-color: #6b7280;
+      --field-bg: #f3f4f6;
+      --field-border: #e5e7eb;
+      --field-text: #111827;
+      --count-color: #4b5563;
+      --notice-color: #9ca3af;
+      --notice-border: #e5e7eb;
+      --container-shadow: rgba(0, 0, 0, 0.25);
+      --toggle-bg: rgba(17, 24, 39, 0.06);
+      --toggle-color: #111827;
+      --success-bg: #ecfdf5;
+      --success-color: #059669;
+      --error-bg: #fef2f2;
+      --error-color: #dc2626;
+    }
+
+    [data-theme="dark"] {
+      --bg-gradient: linear-gradient(135deg, #05070d, #0b1220);
+      --container-bg: #1a1f2b;
+      --title-color: #f3f4f6;
+      --desc-color: #9ca3af;
+      --field-bg: #10141d;
+      --field-border: #2d3340;
+      --field-text: #f3f4f6;
+      --count-color: #9ca3af;
+      --notice-color: #6b7280;
+      --notice-border: #2d3340;
+      --container-shadow: rgba(0, 0, 0, 0.5);
+      --toggle-bg: rgba(255, 255, 255, 0.08);
+      --toggle-color: #f3f4f6;
+      --success-bg: #062e22;
+      --success-color: #34d399;
+      --error-bg: #2e0a0a;
+      --error-color: #f87171;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 30px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: var(--bg-gradient);
+      transition: background 0.3s ease;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding: 45px 30px;
+      border-radius: 24px;
+      text-align: center;
+      background-color: var(--container-bg);
+      box-shadow: 0 20px 50px var(--container-shadow);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 50%;
+      background-color: var(--toggle-bg);
+      color: var(--toggle-color);
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.08);
+    }
+
+    .icon {
+      margin-bottom: 10px;
+      font-size: 50px;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      color: var(--title-color);
+      font-size: 30px;
+      transition: color 0.3s ease;
+    }
+
+    .description {
+      margin-bottom: 30px;
+      color: var(--desc-color);
+      line-height: 1.7;
+      transition: color 0.3s ease;
+    }
+
+    form {
+      text-align: left;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--title-color);
+      font-size: 14px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--field-border);
+      border-radius: 10px;
+      background-color: var(--field-bg);
+      color: var(--field-text);
+      font-family: inherit;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      margin-top: 6px;
+      padding: 16px 34px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    button[type="submit"]:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .status-message {
+      display: none;
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .status-message.show {
+      display: block;
+    }
+
+    .status-message.success {
+      background-color: var(--success-bg);
+      color: var(--success-color);
+    }
+
+    .status-message.error {
+      background-color: var(--error-bg);
+      color: var(--error-color);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid var(--notice-border);
+      color: var(--notice-color);
+      font-size: 13px;
+      text-decoration: none;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--desc-color);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 35px 15px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="다크모드 전환">🌙</button>
+
+    <div class="icon">🤝</div>
+
+    <h1>제휴 문의</h1>
+
+    <p class="description">
+      제휴 및 협업 관련 문의를 남겨주시면<br>
+      빠른 시일 내에 답변드리겠습니다.
+    </p>
+
+    <form id="partnerForm" action="https://formspree.io/f/xppayqgv" method="POST">
+      <div class="field">
+        <label for="name">이름 / 회사명</label>
+        <input type="text" id="name" name="name" placeholder="홍길동 / OO회사" required>
+      </div>
+
+      <div class="field">
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" placeholder="example@email.com" required>
+      </div>
+
+      <div class="field">
+        <label for="subject">제목</label>
+        <input type="text" id="subject" name="subject" placeholder="제휴 문의 제목을 입력해 주세요" required>
+      </div>
+
+      <div class="field">
+        <label for="message">문의 내용</label>
+        <textarea id="message" name="message" placeholder="문의하실 내용을 자세히 작성해 주세요." required></textarea>
+      </div>
+
+      <button type="submit" id="submitButton">문의 보내기</button>
+
+      <p class="status-message" id="statusMessage" role="status"></p>
+    </form>
+
+    <a class="back-link" href="index.html">← 메인으로 돌아가기</a>
+  </main>
+
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+    const partnerForm = document.getElementById("partnerForm");
+    const submitButton = document.getElementById("submitButton");
+    const statusMessage = document.getElementById("statusMessage");
+
+    // 다크모드 / 화이트모드 초기화 및 전환
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+      themeToggle.setAttribute(
+        "aria-label",
+        theme === "dark" ? "라이트모드 전환" : "다크모드 전환"
+      );
+      localStorage.setItem("theme", theme);
+    }
+
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    applyTheme(savedTheme || (prefersDark ? "dark" : "light"));
+
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      applyTheme(currentTheme === "dark" ? "light" : "dark");
+    });
+
+    // Formspree로 폼 데이터 비동기 전송
+    partnerForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      submitButton.disabled = true;
+      submitButton.textContent = "보내는 중...";
+      statusMessage.className = "status-message";
+
+      try {
+        const response = await fetch(partnerForm.action, {
+          method: "POST",
+          body: new FormData(partnerForm),
+          headers: { Accept: "application/json" },
+        });
+
+        if (response.ok) {
+          statusMessage.textContent = "문의가 정상적으로 접수되었습니다. 감사합니다!";
+          statusMessage.classList.add("show", "success");
+          partnerForm.reset();
+        } else {
+          throw new Error("전송 실패");
+        }
+      } catch (error) {
+        statusMessage.textContent = "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.";
+        statusMessage.classList.add("show", "error");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "문의 보내기";
+      }
+    });
+  </script>
+</body>
+</html>
