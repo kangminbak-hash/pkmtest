@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>로또 번호 5세트 추천기</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 30px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: linear-gradient(135deg, #111827, #1d4ed8);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 850px;
+      padding: 45px 30px;
+      border-radius: 24px;
+      text-align: center;
+      background-color: white;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    .icon {
+      margin-bottom: 10px;
+      font-size: 55px;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      color: #111827;
+      font-size: 38px;
+    }
+
+    .description {
+      margin-bottom: 30px;
+      color: #6b7280;
+      line-height: 1.7;
+    }
+
+    /* 전체 추천 번호 영역 */
+    .lotto-container {
+      min-height: 120px;
+      margin-bottom: 30px;
+      padding: 20px;
+      border-radius: 18px;
+      background-color: #f3f4f6;
+    }
+
+    .start-message {
+      padding: 30px 10px;
+      color: #6b7280;
+    }
+
+    /* 한 세트 */
+    .lotto-set {
+      margin-bottom: 12px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      border-radius: 14px;
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .lotto-set:last-child {
+      margin-bottom: 0;
+    }
+
+    .set-label {
+      min-width: 55px;
+      color: #1d4ed8;
+      font-weight: bold;
+    }
+
+    .balls {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .ball {
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.18);
+      animation: ballAppear 0.45s ease both;
+    }
+
+    .yellow {
+      background-color: #f5b700;
+    }
+
+    .blue {
+      background-color: #3b82f6;
+    }
+
+    .red {
+      background-color: #ef4444;
+    }
+
+    .gray {
+      background-color: #6b7280;
+    }
+
+    .green {
+      background-color: #22a559;
+    }
+
+    @keyframes ballAppear {
+      from {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.5);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    button {
+      padding: 16px 34px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .count {
+      margin-top: 18px;
+      color: #4b5563;
+      font-size: 14px;
+    }
+
+    .notice {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      color: #9ca3af;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 35px 15px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .lotto-container {
+        padding: 12px;
+      }
+
+      .lotto-set {
+        padding: 14px 8px;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .ball {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+      }
+
+      .balls {
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <div class="icon">🎱</div>
+
+    <h1>로또 번호 5세트 추천기</h1>
+
+    <p class="description">
+      버튼을 누르면 중복되지 않는 숫자 6개로 구성된<br>
+      로또 번호를 총 5세트 추천합니다.
+    </p>
+
+    <div
+      class="lotto-container"
+      id="lottoContainer"
+      aria-live="polite"
+    >
+      <p class="start-message">
+        버튼을 눌러 번호를 추천받아 보세요!
+      </p>
+    </div>
+
+    <button type="button" id="generateButton">
+      🎲 5세트 추천받기
+    </button>
+
+    <p class="count" id="countText">추천 횟수: 0회</p>
+
+    <p class="notice">
+      추천 번호는 무작위로 생성되며 당첨을 보장하지 않습니다.<br>
+      재미와 참고 목적으로만 이용해 주세요.
+    </p>
+  </main>
+
+  <script>
+    const lottoContainer = document.getElementById("lottoContainer");
+    const generateButton = document.getElementById("generateButton");
+    const countText = document.getElementById("countText");
+
+    let recommendationCount = 0;
+
+    // 번호에 따른 공 색상
+    function getBallColor(number) {
+      if (number <= 10) {
+        return "yellow";
+      } else if (number <= 20) {
+        return "blue";
+      } else if (number <= 30) {
+        return "red";
+      } else if (number <= 40) {
+        return "gray";
+      } else {
+        return "green";
+      }
+    }
+
+    // 중복되지 않는 숫자 6개 생성
+    function generateLottoNumbers() {
+      const numbers = new Set();
+
+      while (numbers.size < 6) {
+        const randomNumber = Math.floor(Math.random() * 45) + 1;
+        numbers.add(randomNumber);
+      }
+
+      return [...numbers].sort((a, b) => a - b);
+    }
+
+    // 5세트 출력
+    function showLottoNumbers() {
+      lottoContainer.innerHTML = "";
+
+      for (let setNumber = 1; setNumber <= 5; setNumber++) {
+        const numbers = generateLottoNumbers();
+
+        const lottoSet = document.createElement("div");
+        lottoSet.className = "lotto-set";
+
+        const setLabel = document.createElement("div");
+        setLabel.className = "set-label";
+        setLabel.textContent = `${setNumber}세트`;
+
+        const balls = document.createElement("div");
+        balls.className = "balls";
+
+        numbers.forEach((number, numberIndex) => {
+          const ball = document.createElement("div");
+
+          ball.className = `ball ${getBallColor(number)}`;
+          ball.textContent = number;
+          ball.style.animationDelay =
+            `${(setNumber - 1) * 0.1 + numberIndex * 0.05}s`;
+
+          balls.appendChild(ball);
+        });
+
+        lottoSet.appendChild(setLabel);
+        lottoSet.appendChild(balls);
+        lottoContainer.appendChild(lottoSet);
+      }
+
+      recommendationCount++;
+      countText.textContent = `추천 횟수: ${recommendationCount}회`;
+      generateButton.textContent = "🔄 새로운 5세트 추천받기";
+    }
+
+    generateButton.addEventListener("click", showLottoNumbers);
+  </script>
+</body>
+</html>
+
